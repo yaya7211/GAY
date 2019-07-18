@@ -1,11 +1,9 @@
 import sys
-
-#Decipher
-
 alphabet = {2:'a', 3:'b', 5:'c'}
 msg = sys.argv[1]
+ordre = sys.argv[2]
 msg = int(msg)
-lst = []
+lst = fin =[]
 d = 2
 while msg > 1 :
     while msg % d==0 :
@@ -16,5 +14,19 @@ a = 0
 while a != len(lst) :
     lst[a] = alphabet[lst[a]]
     a += 1
-lst = str(lst)
-print(lst)
+a = 0
+while a != len(lst):
+	lst[a] = str(lst[a])
+	a += 1
+dico = {}
+a = 0
+while a != len(ordre):
+	dico.update({int(ordre[a]) : lst[a]})
+	a += 1
+a = 0
+b = len(dico)
+while a != b:
+	fin.append(min(dico[min(dico)]))
+	dico.pop(min(dico))
+	a += 1
+print(fin)
