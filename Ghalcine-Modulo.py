@@ -1,4 +1,3 @@
-import uuid
 import random
 
 def Cipher(mot, alphCipher):
@@ -71,14 +70,125 @@ def Decipher(mot, alphaDecipher):
 
 
 
-def Alphagen(choix):
-	"""Alphabet and primary numbers blender function, use like Ghalcine.alphagen('gen')"""
+def Alphagen(mdp):
+	"""Alphabet and primary numbers blender function, use like Ghalcine.alphagen(aPassWord)"""
 	primes = []
 	charset = 'azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN01234567890.+-*/²&é"\'(-è_çà)=~#{[|`\\^@]^$ù*,;:!¨%µ?./§<>\n'
-	if choix == "gen":
-	    a = uuid.uuid1().int
-	elif type(choix) == 0:
-	    a = int(choix)
+	passList = {"a" : 0,
+		"z" : 1,
+		"e" : 2,
+		"r" : 3,
+		"t" : 4,
+		"y" : 5,
+		"u" : 6,
+		"i" : 7,
+		"o" : 8,
+		"p" : 9,
+		"q" : 10,
+		"s" : 11,
+		"d" : 12,
+		"f" : 13,
+		"g" : 14,
+		"h" : 15,
+		"j" : 16,
+		"k" : 17,
+		"l" : 18,
+		"m" : 19,
+		"w" : 20,
+		"x" : 21,
+		"c" : 22,
+		"v" : 23,
+		"b" : 24,
+		"n" : 25,
+		"A" : 26,
+		"Z" : 27,
+		"E" : 28,
+		"R" : 29,
+		"T" : 30,
+		"Y" : 31,
+		"U" : 32,
+		"I" : 33,
+		"O" : 34,
+		"P" : 35,
+		"Q" : 36,
+		"S" : 37,
+		"D" : 38,
+		"F" : 39,
+		"G" : 40,
+		"H" : 41,
+		"J" : 42,
+		"K" : 43,
+		"L" : 44,
+		"M" : 45,
+		"W" : 46,
+		"X" : 47,
+		"C" : 48,
+		"V" : 49,
+		"B" : 50,
+		"N" : 51,
+		"0" : 52,
+		"1" : 53,
+		"2" : 54,
+		"3" : 55,
+		"4" : 56,
+		"5" : 57,
+		"6" : 58,
+		"7" : 59,
+		"8" : 60,
+		"9" : 61,
+		"0" : 62,
+		"." : 63,
+		"+" : 64,
+		"-" : 65,
+		"*" : 66,
+		"/" : 67,
+		"²" : 68,
+		"&" : 69,
+		"é" : 70,
+		"\"" : 71,
+		"'" : 72,
+		"(" : 73,
+		"-" : 74,
+		"è" : 75,
+		"_" : 76,
+		"ç" : 77,
+		"à" : 78,
+		")" : 79,
+		"=" : 80,
+		"~" : 81,
+		"#" : 82,
+		"{" : 83,
+		"[" : 84,
+		"|" : 85,
+		"`" : 86,
+		"\\" : 87,
+		"^" : 88,
+		"@" : 89,
+		"]" : 90,
+		"^" : 91,
+		"$" : 92,
+		"ù" : 93,
+		"*" : 94,
+		"," : 95,
+		";" : 96,
+		":" : 97,
+		"!" : 98,
+		"¨" : 99,
+		"%" : 100,
+		"µ" : 101,
+		"?" : 102,
+		"." : 103,
+		"/" : 104,
+		"§" : 105,
+		"<" : 106,
+		">" : 107,
+		"\n" : 108}
+	a = ""
+	c = 0
+	while len(a) != len(mdp):
+		a += str(passList[mdp[c]])
+		c += 1
+	a = int(a)
 	a2 = a
 	while a != a2 + len(charset):
 	    b = 0
