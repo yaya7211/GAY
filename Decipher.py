@@ -1,32 +1,26 @@
 import sys
-alphabet = {2:'a', 3:'b', 5:'c'}
-msg = sys.argv[1]
-ordre = sys.argv[2]
-msg = int(msg)
-lst = fin =[]
+
+alphabet = {2:"a", 3:"b", 5:"c",7:"d"}
+msg = int(sys.argv[1])
+ordre = sys.argv[2].split(".")
+msgF =[]
+
 d = 2
 while msg > 1 :
     while msg % d==0 :
         msg = msg // d
-        lst.append(d)
+        msgF.append(d)
     d += 1
-a = 0
-while a != len(lst) :
-    lst[a] = alphabet[lst[a]]
-    a += 1
-a = 0
-while a != len(lst):
-	lst[a] = str(lst[a])
-	a += 1
-dico = {}
-a = 0
-while a != len(ordre):
-	dico.update({int(ordre[a]) : lst[a]})
-	a += 1
-a = 0
-b = len(dico)
-while a != b:
-	fin.append(min(dico[min(dico)]))
-	dico.pop(min(dico))
-	a += 1
-print(fin)
+
+d = 0
+while d != len(msgF):
+    msgF[d] = alphabet[msgF[d]]
+    d += 1
+
+final = []
+d = 0
+while d != len(msgF):
+    final.append(msgF[int(ordre[d])])
+    d += 1
+
+print(final) 
