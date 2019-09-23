@@ -1,10 +1,10 @@
 # GAY
 Ciphering-Deciphering
 
-Create Key : python3 KeyGen.py aze 2 cip => [key's charset] [1st prim num] [cip for cyphering key]
-Cypher : python3 Cipher.py aze => [word to cypher]
-Create decypherring Key : python3 KeyGen.py aze 2 decip => [key's charset] [1st prim num] [decip for decyphering key]
-Decypher : python3 Decipher.py 120 1.2.3 [the word to decypher] [it's order] 
+ Create Key : python3 KeyGen.py aze 2 cip => [key's charset] [1st prim num] [cip for cyphering key]
+ Cypher : python3 Cipher.py aze => [word to cypher]
+ Create decypherring Key : python3 KeyGen.py aze 2 decip => [key's charset] [1st prim num] [decip for decyphering key]
+ Decypher : python3 Decipher.py 120 1.2.3 [the word to decypher] [it's order] 
 
 
 Python modulo :
