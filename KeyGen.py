@@ -3,7 +3,7 @@ import sys
 def isPrime(prime):
 	lst = []
 	d = 2
-	while d < prime ** 0.5 :
+	while d <= prime ** 0.5 :
 		if prime % d != 0:
 			pass
 		elif prime % d == 0:
