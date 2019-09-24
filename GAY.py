@@ -16,17 +16,12 @@ class GAY:
 		ordre = []
 		for letter in lst:
 			ordre += [index for index, value in enumerate(msg) if value == letter]
-		ordre1 = str(ordre[0])
-		a = 1
-		while a != len(ordre):
-			ordre1 = ordre1+"."+str(ordre[a])
-			a += 1
-			return [mot, ordre]
+		return [mot, ordre]
 
 	def decipher(self):
 		alphabet = self.key[1]
 		msg = self.word[0]
-		ordre = self.word[1].split(".")
+		ordre = self.word[1]
 		msgF =[]
 		d = 2
 		while msg > 1 :
@@ -57,7 +52,7 @@ def isPrime(prime):
 	return True
 
 def KeyGen(charset, primeToTest):
-	primes = final =[]
+	primes = []
 	dic = {}
 	while len(primes) != len(charset):
 		if isPrime(primeToTest):
@@ -69,8 +64,9 @@ def KeyGen(charset, primeToTest):
 	while a != len(charset):
 		dic.update({charset[a]:primes[a]})
 		a += 1
-	dic = {}
+	final = []
 	final.append(dic)
+	dic = {}
 	a = 0
 	while a != len(charset):
 		dic.update({primes[a]:charset[a]})
