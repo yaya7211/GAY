@@ -1,44 +1,55 @@
+class UnfoundElementError(Exception):
+	pass
+class InvalidKeyFormatError(Exception):
+	pass
+
 class GAY:
 	def __init__(self):
 		self.key = None
 		self.word = None
 
 	def cipher(self):
-		alphabet = self.key[0]
-		msg = self.word
-		lst = []
-		a = 0
-		mot = 1
-		while a != len(msg) :
-		    mot = mot * alphabet[msg[a]]
-		    a += 1
-		lst = sorted(set(msg))	
-		ordre = []
-		for letter in lst:
-			ordre += [index for index, value in enumerate(msg) if value == letter]
-		return [mot, ordre]
+		try:
+			alphabet = self.key[0]
+			msg = self.word
+			lst = []
+			a = 0
+			mot = 1
+			while a != len(msg) :
+			    mot = mot * alphabet[msg[a]]
+			    a += 1
+			lst = sorted(set(msg))	
+			ordre = []
+			for letter in lst:
+				ordre += [index for index, value in enumerate(msg) if value == letter]
+			return [mot, ordre]
+		except KeyError:
+			raise UnfoundElementError("A caracter is missing in key.")
 
 	def decipher(self):
-		alphabet = self.key[1]
-		msg = self.word[0]
-		ordre = self.word[1]
-		msgF =[]
-		d = 2
-		while msg > 1 :
-		    while msg % d==0 :
-		        msg = msg // d
-		        msgF.append(d)
-		    d += 1
-		d = 0
-		while d != len(msgF):
-		    msgF[d] = alphabet[msgF[d]]
-		    d += 1
-		final = ""
-		d = 0
-		while d != len(msgF):
-		    final += msgF[int(ordre[d])]
-		    d += 1
-		return final
+		try:
+			alphabet = self.key[1]
+			msg = self.word[0]
+			ordre = self.word[1]
+			msgF =[]
+			d = 2
+			while msg > 1 :
+			    while msg % d==0 :
+			        msg = msg // d
+			        msgF.append(d)
+			    d += 1
+			d = 0
+			while d != len(msgF):
+			    msgF[d] = alphabet[msgF[d]]
+			    d += 1
+			final = ""
+			d = 0
+			while d != len(msgF):
+			    final += msgF[int(ordre[d])]
+			    d += 1
+			return final
+		except KeyError:
+			raise UnfoundElementError("A primary number is missing in key.")
 
 def isPrime(prime):
 	lst = []
@@ -52,6 +63,11 @@ def isPrime(prime):
 	return True
 
 def KeyGen(charset, primeToTest):
+	"""Key generator, use like KeyGen([yourCharset], [aNumber>0])"""
+	if list(charset) != sorted(list(charset)):
+		raise InvalidKeyFormatError("Charset should be in alphabetical order.")
+	if len(list(charset)) != len(set(list(charset))):
+		raise InvalidKeyFormatError("Caracter should not have more than one occurrence.")
 	primes = []
 	dic = {}
 	while len(primes) != len(charset):
