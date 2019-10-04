@@ -18,10 +18,12 @@ class GAY:
 			while a != len(msg) :
 			    mot = mot * alphabet[msg[a]]
 			    a += 1
-			lst = sorted(set(msg))	
-			ordre = []
-			for letter in lst:
-				ordre += [index for index, value in enumerate(msg) if value == letter]
+			xc = [(index,item) for item,index in enumerate(msg)]
+			ry = sorted(xc, key = lambda msg : msg[0])
+			y = [item[0] for item in ry]
+			ordre = [0] * len(msg)
+			for index,item in enumerate(ry):
+			    ordre[item[1]] = index
 			return [mot, ordre]
 		except KeyError:
 			raise UnfoundElementError("A caracter is missing in key.")
