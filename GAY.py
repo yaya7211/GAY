@@ -24,15 +24,19 @@ class GAY:
 			ordre = [0] * len(msg)
 			for index,item in enumerate(ry):
 			    ordre[item[1]] = index
-			return [mot, ordre]
+			for x in range(0, len(ordre)):
+				ordre[x] = str(ordre[x])
+			return str(mot)+"/"+".".join(ordre)
 		except KeyError:
 			raise UnfoundElementError("A caracter is missing in key.")
 
 	def decipher(self):
 		try:
 			alphabet = self.key[1]
-			msg = self.word[0]
-			ordre = self.word[1]
+			msg = int(self.word.split("/")[0])
+			ordre = self.word.split("/")[1].split(".")
+			for x in range(0,len(ordre)):
+				ordre[x] = int(ordre[x])
 			msgF =[]
 			d = 2
 			while msg > 1 :
