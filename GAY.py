@@ -95,3 +95,4 @@ def KeyGen(charset, primeToTest):
 		a += 1
 	final.append(dic)
 	return final
+#test
