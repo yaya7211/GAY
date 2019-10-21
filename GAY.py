@@ -1,17 +1,15 @@
 class UnfoundElementError(Exception):
 	pass
-class InvalidKeyFormatError(Exception):
-	pass
 
 class GAY:
 	def __init__(self):
 		self.key = None
-		self.word = None
 
-	def cipher(self):
+	def cipher(self, word):
+		"""Cyphering method"""
 		try:
 			alphabet = self.key[0]
-			msg = self.word
+			msg = word
 			lst = []
 			a = 0
 			mot = 1
@@ -30,11 +28,12 @@ class GAY:
 		except KeyError:
 			raise UnfoundElementError("A caracter is missing in key.")
 
-	def decipher(self):
+	def decipher(self, word):
+		"""Decyphering method"""
 		try:
 			alphabet = self.key[1]
-			msg = int(self.word.split("/")[0])
-			ordre = self.word.split("/")[1].split(".")
+			msg = int(word.split("/")[0])
+			ordre = word.split("/")[1].split(".")
 			for x in range(0,len(ordre)):
 				ordre[x] = int(ordre[x])
 			msgF =[]
@@ -70,10 +69,11 @@ def isPrime(prime):
 
 def KeyGen(charset, primeToTest):
 	"""Key generator, use like KeyGen([yourCharset], [aNumber>0])"""
-	if list(charset) != sorted(list(charset)):
-		raise InvalidKeyFormatError("Charset should be in alphabetical order.")
+	charset = sorted(charset)
 	if len(list(charset)) != len(set(list(charset))):
 		raise InvalidKeyFormatError("Caracter should not have more than one occurrence.")
+	global order 
+	order = list(charset)
 	primes = []
 	dic = {}
 	while len(primes) != len(charset):
