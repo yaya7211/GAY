@@ -1,4 +1,3 @@
-#test
 class UnfoundElementError(Exception):
 	pass
 class InvalidKeyFormatError(Exception):
