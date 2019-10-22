@@ -1,3 +1,5 @@
+import collections
+
 class UnfoundElementError(Exception):
 	pass
 
@@ -6,7 +8,7 @@ class GAY:
 		self.key = None
 
 	def cipher(self, word):
-		"""Cyphering method"""
+		"""Cyphering method, use like GAY.cypher(\"wordToCypher\"), after setting the key in GAY().key"""
 		try:
 			alphabet = self.key[0]
 			msg = word
@@ -16,12 +18,14 @@ class GAY:
 			while a != len(msg) :
 			    mot = mot * alphabet[msg[a]]
 			    a += 1
-			xc = [(index,item) for item,index in enumerate(msg)]
-			ry = sorted(xc, key = lambda msg : msg[0])
-			y = [item[0] for item in ry]
-			ordre = [0] * len(msg)
-			for index,item in enumerate(ry):
-			    ordre[item[1]] = index
+			######From Kwak######
+			traduction_char = collections.defaultdict(list)
+			swap = lambda tup: (tup[1], tup[0])
+			char_index = dict(map(swap, enumerate(order)))
+			for i, ch in enumerate(sorted(msg, key=lambda ch: char_index[ch])):
+				traduction_char[ch].append(i)
+			######From Kwak######
+			ordre = list(map(lambda ch: traduction_char[ch].pop(), msg))
 			for x in range(0, len(ordre)):
 				ordre[x] = str(ordre[x])
 			return str(mot)+"/"+".".join(ordre)
@@ -29,13 +33,14 @@ class GAY:
 			raise UnfoundElementError("A caracter is missing in key.")
 
 	def decipher(self, word):
-		"""Decyphering method"""
+		"""Decyphering method, use like GAY().decypher(\"wordtodecypher\"), after setting the key in GAY().key"""
 		try:
 			alphabet = self.key[1]
 			msg = int(word.split("/")[0])
 			ordre = word.split("/")[1].split(".")
 			for x in range(0,len(ordre)):
 				ordre[x] = int(ordre[x])
+			######From stackoverflow######
 			msgF =[]
 			d = 2
 			while msg > 1 :
@@ -43,6 +48,7 @@ class GAY:
 			        msg = msg // d
 			        msgF.append(d)
 			    d += 1
+			######From stackoverflow######
 			d = 0
 			while d != len(msgF):
 			    msgF[d] = alphabet[msgF[d]]
@@ -68,8 +74,7 @@ def isPrime(prime):
 	return True
 
 def KeyGen(charset, primeToTest):
-	"""Key generator, use like KeyGen([yourCharset], [aNumber>0])"""
-	charset = sorted(charset)
+	"""Key generator, use like KeyGen([yourCharset], [anInteger])"""
 	if len(list(charset)) != len(set(list(charset))):
 		raise InvalidKeyFormatError("Caracter should not have more than one occurrence.")
 	global order 
