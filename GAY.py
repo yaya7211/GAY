@@ -1,4 +1,4 @@
-import collections
+import collections, random
 
 class UnfoundElementError(Exception):
 	pass
@@ -77,8 +77,11 @@ def KeyGen(charset, primeToTest):
 	"""Key generator, use like KeyGen([yourCharset], [anInteger])"""
 	if len(list(charset)) != len(set(list(charset))):
 		raise InvalidKeyFormatError("Caracter should not have more than one occurrence.")
-	global order 
+	global order #cipher
+	global char
+	char = charset
 	order = list(charset)
+	global primes
 	primes = []
 	dic = {}
 	while len(primes) != len(charset):
@@ -88,6 +91,7 @@ def KeyGen(charset, primeToTest):
 			pass
 		primeToTest += 1
 	a = 0
+	random.shuffle(primes)
 	while a != len(charset):
 		dic.update({charset[a]:primes[a]})
 		a += 1
@@ -99,4 +103,37 @@ def KeyGen(charset, primeToTest):
 		dic.update({primes[a]:charset[a]})
 		a += 1
 	final.append(dic)
+	return final
+
+def saveKey():
+	f = open("key.key", "w")
+	f.write(char+"\n")
+	p = ""
+	for x in range(len(primes)):
+		p += str(primes[x])+" "
+	f.write(p)
+	f.close()
+
+def useKey(path):
+	f = open(path, "r")
+	a = f.read()
+	charset = a.split("\n")[0]
+	primes = a.split("\n")[1]
+	primes = primes.split(" ")
+	primes.pop(len(primes) - 1)
+	dic = {}
+	a = 0
+	while a != len(charset):
+		dic.update({charset[a]:int(primes[a])})
+		a += 1
+	final = []
+	final.append(dic)
+	dic = {}
+	a = 0
+	while a != len(charset):
+		dic.update({int(primes[a]):charset[a]})
+		a += 1
+	final.append(dic)
+	global order 
+	order = charset
 	return final
