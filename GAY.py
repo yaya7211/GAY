@@ -73,6 +73,24 @@ def isPrime(prime):
 		d += 1
 	return True
 
+def mDic(primes, charset):
+	dic = {}
+	a = 0
+	while a != len(charset):
+		dic.update({charset[a]:int(primes[a])})
+		a += 1
+	final = []
+	final.append(dic)
+	dic = {}
+	a = 0
+	while a != len(charset):
+		dic.update({int(primes[a]):charset[a]})
+		a += 1
+	final.append(dic)
+	global order 
+	order = charset
+	return final
+
 def KeyGen(charset, primeToTest):
 	"""Key generator, use like KeyGen([yourCharset], [anInteger])"""
 	if len(list(charset)) != len(set(list(charset))):
@@ -81,29 +99,7 @@ def KeyGen(charset, primeToTest):
 	global char
 	char = charset
 	order = list(charset)
-	global primes
-	primes = []
-	dic = {}
-	while len(primes) != len(charset):
-		if isPrime(primeToTest):
-			primes.append(primeToTest)
-		else:
-			pass
-		primeToTest += 1
-	a = 0
-	random.shuffle(primes)
-	while a != len(charset):
-		dic.update({charset[a]:primes[a]})
-		a += 1
-	final = []
-	final.append(dic)
-	dic = {}
-	a = 0
-	while a != len(charset):
-		dic.update({primes[a]:charset[a]})
-		a += 1
-	final.append(dic)
-	return final
+	return mDic(primes, charset)
 
 def saveKey():
 	f = open("key.key", "w")
@@ -121,19 +117,4 @@ def useKey(path):
 	primes = a.split("\n")[1]
 	primes = primes.split(" ")
 	primes.pop(len(primes) - 1)
-	dic = {}
-	a = 0
-	while a != len(charset):
-		dic.update({charset[a]:int(primes[a])})
-		a += 1
-	final = []
-	final.append(dic)
-	dic = {}
-	a = 0
-	while a != len(charset):
-		dic.update({int(primes[a]):charset[a]})
-		a += 1
-	final.append(dic)
-	global order 
-	order = charset
-	return final
+	return mDic(primes, charset)
