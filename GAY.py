@@ -63,6 +63,7 @@ class GAY:
 			raise UnfoundElementError("A primary number is missing in key.")
 
 def isPrime(prime):
+	"""Plz don't use this func, it's for the dev"""
 	lst = []
 	d = 2
 	while d <= prime ** 0.5 :
@@ -74,6 +75,7 @@ def isPrime(prime):
 	return True
 
 def mDic(primes, charset):
+	"""Plz don't use this func, it's for the dev"""
 	dic = {}
 	a = 0
 	while a != len(charset):
@@ -91,7 +93,7 @@ def mDic(primes, charset):
 	order = charset
 	return final
 
-def KeyGen(charset, primeToTest):
+def KeyGen(charset, prim):
 	"""Key generator, use like KeyGen([yourCharset], [anInteger])"""
 	if len(list(charset)) != len(set(list(charset))):
 		raise InvalidKeyFormatError("Caracter should not have more than one occurrence.")
@@ -99,6 +101,12 @@ def KeyGen(charset, primeToTest):
 	global char
 	char = charset
 	order = list(charset)
+	primes = []
+	while len(primes) != len(charset):
+		if isPrime(prim):
+			primes.append(prim)
+		prim += 1
+	print(primes)
 	return mDic(primes, charset)
 
 def saveKey():
@@ -118,3 +126,5 @@ def useKey(path):
 	primes = primes.split(" ")
 	primes.pop(len(primes) - 1)
 	return mDic(primes, charset)
+
+
