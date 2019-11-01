@@ -106,7 +106,7 @@ def KeyGen(charset, prim):
 		if isPrime(prim):
 			primes.append(prim)
 		prim += 1
-	print(primes)
+	random.shuffle(primes)
 	return mDic(primes, charset)
 
 def saveKey():
