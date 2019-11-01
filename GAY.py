@@ -126,5 +126,3 @@ def useKey(path):
 	primes = primes.split(" ")
 	primes.pop(len(primes) - 1)
 	return mDic(primes, charset)
-
-
