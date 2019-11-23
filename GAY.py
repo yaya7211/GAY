@@ -1,11 +1,11 @@
-import collections, random
+import collections
 
 class UnfoundElementError(Exception):
 	pass
 
 class GAY:
 	def __init__(self):
-		self.key = None
+		self.key = []
 
 	def cipher(self, word):
 		"""Cyphering method, use like GAY.cypher(\"wordToCypher\"), after setting the key in GAY().key"""
@@ -101,12 +101,12 @@ def KeyGen(charset, prim):
 	global char
 	char = charset
 	order = list(charset)
+	global primes
 	primes = []
 	while len(primes) != len(charset):
 		if isPrime(prim):
 			primes.append(prim)
 		prim += 1
-	random.shuffle(primes)
 	return mDic(primes, charset)
 
 def saveKey():
