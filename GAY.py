@@ -62,6 +62,55 @@ class GAY:
 		except KeyError:
 			raise UnfoundElementError("A primary number is missing in key.")
 
+	def hash(self, word):
+		try:
+			alphabet = self.key[0]
+			msg = word
+			lst = []
+			a = 0
+			mot = 1
+			while a != len(msg) :
+			    mot = mot * alphabet[msg[a]]
+			    a += 1
+			######From Kwak######
+			traduction_char = collections.defaultdict(list)
+			swap = lambda tup: (tup[1], tup[0])
+			char_index = dict(map(swap, enumerate(order)))
+			for i, ch in enumerate(sorted(msg, key=lambda ch: char_index[ch])):
+				traduction_char[ch].append(i)
+			######From Kwak######
+			ordre = list(map(lambda ch: traduction_char[ch].pop(), msg))
+			for x in range(0, len(ordre)):
+				ordre[x] = str(ordre[x])
+			ordre = "".join(ordre)
+			mot = str(mot)
+			x = len(mot)
+			y = len(ordre)
+			final = ""
+			a = pgcd(x,y)
+			if a != 1:
+				x = x // a
+				y = y // a
+				for e in range(a):
+					final += mot[:x-1]
+					mot = mot[x-1:]
+					final += ordre[:y-1]
+					ordre = ordre[y-1:]
+			else:
+				f = list(zip(mot, ordre))
+				for x in f:
+					for y in x:
+						final += y
+			return final
+		except KeyError:
+			raise UnfoundElementError("A primary number is missing in key.")
+
+
+def pgcd(a,b) :  
+   while a%b != 0 : 
+      a, b = b, a%b 
+   return b
+
 def isPrime(prime):
 	"""Plz don't use this func, it's for the dev"""
 	lst = []
