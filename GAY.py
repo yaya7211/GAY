@@ -98,10 +98,14 @@ class GAY:
 					final += ordre[:y-1]
 					ordre = ordre[y-1:]
 			else:
-				f = list(zip(mot, ordre))
-				for x in f:
-					for y in x:
-						final += y
+				a = 0
+				while pgcd(x, y) == 1:
+					try:
+						mot = mot + mot[a]
+					except IndexError:
+						a = 0
+					a += 1
+				hash(mot)
 			return final
 		except KeyError:
 			raise UnfoundElementError("A primary number is missing in key.")
