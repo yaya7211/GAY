@@ -98,7 +98,7 @@ The hash is the sucession of 1 caracter from the first part of the cyphred word 
 	- 0 : 2nd caracter from [1.0.2]
 We stopped before using the last element of [1.0.2] because we took all elements from 30.
 The first caracter is always the first caracter from the first part of the cyphered word.
-If the greatest common divisor equal 1, we add a caracter from the word to cypher until the GCD changes.
+If the greatest common divisor equal 1, the first part become the first half of the word ( ex : 3040 become 30).
 
 That's all for the algorythm, let's use it in the module.
 
