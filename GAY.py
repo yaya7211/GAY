@@ -7,7 +7,7 @@ class GAY:
 	def __init__(self):
 		self.key = []
 
-	def cipher(self, word):
+	def cypher(self, word):
 		"""Cyphering method, use like GAY.cypher(\"wordToCypher\"), after setting the key in GAY().key"""
 		try:
 			alphabet = self.key[0]
@@ -32,7 +32,7 @@ class GAY:
 		except KeyError:
 			raise UnfoundElementError("A caracter is missing in key.")
 
-	def decipher(self, word):
+	def decypher(self, word):
 		"""Decyphering method, use like GAY().decypher(\"wordtodecypher\"), after setting the key in GAY().key"""
 		try:
 			alphabet = self.key[1]
@@ -63,6 +63,7 @@ class GAY:
 			raise UnfoundElementError("A primary number is missing in key.")
 
 	def hash(self, word):
+		"""hashing method, use like GAY().hash(\"wordtohash\"), after setting the key in GAY().key"""
 		try:
 			alphabet = self.key[0]
 			msg = word
@@ -105,11 +106,13 @@ class GAY:
 		except KeyError:
 			raise UnfoundElementError("A primary number is missing in key.")
 
-
-def pgcd(a,b) :  
+########From developpez.net##########
+def pgcd(a,b) :
+	"""Plz don't use this func, it's for the dev""" 
    while a%b != 0 : 
       a, b = b, a%b 
    return b
+########From developpez.net##########
 
 def isPrime(prime):
 	"""Plz don't use this func, it's for the dev"""
@@ -142,7 +145,7 @@ def mDic(primes, charset):
 	order = charset
 	return final
 
-def KeyGen(charset, prim):
+def key_gen(charset, prim):
 	"""Key generator, use like KeyGen([yourCharset], [anInteger])"""
 	if len(list(charset)) != len(set(list(charset))):
 		raise InvalidKeyFormatError("Caracter should not have more than one occurrence.")
@@ -158,8 +161,8 @@ def KeyGen(charset, prim):
 		prim += 1
 	return mDic(primes, charset)
 
-def saveKey():
-	f = open("key.key", "w")
+def save_key(path):
+	f = open(path, "w")
 	f.write(char+"\n")
 	p = ""
 	for x in range(len(primes)):
@@ -167,7 +170,7 @@ def saveKey():
 	f.write(p)
 	f.close()
 
-def useKey(path):
+def use_key(path):
 	f = open(path, "r")
 	a = f.read()
 	charset = a.split("\n")[0]
