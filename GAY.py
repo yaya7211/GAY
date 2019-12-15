@@ -7,7 +7,7 @@ class GAY:
 	def __init__(self):
 		self.key = []
 
-	def cypher(self, word):
+	def cipher(self, word):
 		"""Cyphering method, use like GAY.cypher(\"wordToCypher\"), after setting the key in GAY().key"""
 		try:
 			alphabet = self.key[0]
@@ -32,7 +32,7 @@ class GAY:
 		except KeyError:
 			raise UnfoundElementError("A caracter is missing in key.")
 
-	def decypher(self, word):
+	def decipher(self, word):
 		"""Decyphering method, use like GAY().decypher(\"wordtodecypher\"), after setting the key in GAY().key"""
 		try:
 			alphabet = self.key[1]
@@ -63,7 +63,6 @@ class GAY:
 			raise UnfoundElementError("A primary number is missing in key.")
 
 	def hash(self, word):
-		"""hashing method, use like GAY().hash(\"wordtohash\"), after setting the key in GAY().key"""
 		try:
 			alphabet = self.key[0]
 			msg = word
@@ -98,25 +97,21 @@ class GAY:
 					final += ordre[:y-1]
 					ordre = ordre[y-1:]
 			else:
-				a = 0
-				while pgcd(x, y) == 1:
-					try:
-						mot = mot + mot[a]
-					except IndexError:
-						a = 0
-					a += 1
-				hash(mot)
+				mot = mot[:len(mot)//2]
+				f = list(zip(mot, ordre))
+				for x in f:
+					for y in x:
+						final += y
 			return final
 		except KeyError:
 			raise UnfoundElementError("A primary number is missing in key.")
 
-########From developpez.net##########
-def pgcd(a,b) :
-	"""Plz don't use this func, it's for the dev""" 
-   while a%b != 0 : 
-      a, b = b, a%b 
-   return b
-########From developpez.net##########
+
+
+def pgcd(a,b) :  
+	while a%b != 0 : 
+		a, b = b, a%b 
+	return b
 
 def isPrime(prime):
 	"""Plz don't use this func, it's for the dev"""
@@ -165,8 +160,8 @@ def key_gen(charset, prim):
 		prim += 1
 	return mDic(primes, charset)
 
-def save_key(path):
-	f = open(path, "w")
+def save_key():
+	f = open("key.key", "w")
 	f.write(char+"\n")
 	p = ""
 	for x in range(len(primes)):
