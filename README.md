@@ -95,8 +95,8 @@ That's all for the algorythm, let's use it in the module.
 ```py
 ìmport GAY
 
-g = GAY.GAY()
-g.key = GAY.key_gen("abc", 2)
+key = GAY.key_gen("abc", 2)
+g = GAY.GAY(key)
 print(g.cipher("bac"))
 print(g.hash("bac"))
 ``` 
