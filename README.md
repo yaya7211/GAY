@@ -1,6 +1,6 @@
 # GAY crypto
 
-GAY is a collection of cryptography tools that includes symetrical cyphering and decyphering and hashing based on an algorythm using primary numbers.
+GAY is a collection of cryptography tools used for symetrical cyphering and decyphering and hashing based on an primary numbers based on algorythm.
 
 ## Getting Started
 
@@ -12,34 +12,23 @@ Should be used on a Python 3 environement. With "collections" module installed.
 
 ### Installing
 
-Install collections with pip
+Install GAY and collections with pip
 
 On Windows : 
 ```
 py -m pip install collections
+py -m pip install GAY
 ```
 
 On Linux : 
 ```
 pip3 install collections
-```
-Then install GAY modulo from this Github : 
-
-If you use git : 
-```
-git clone https://github.com/yaya7211/GAY
-```
-Or manually if you don't use git.
-
-Then export the main file into your Python packages path.
-On Windows (default) : 
-```
-C:\Users\Random\AppData\Local\Programs\Python\Python37\Lib
+pip3 install GAY
 ``` 
 
 ## Running the tests
 
-Check that the file is succefully exported in your packages path by trying on your Python interpretor :
+Check that the lib is succefully installed by trying on your Python interpretor :
 ```
 >>>import GAY
 ```
@@ -51,38 +40,37 @@ Let's see how does that works.
 
 # The cyphering
 
-First of all, the cyphering-decyphering system, it works with a symetrical key that contains all caracters that can be used and a list of primary number. Let's creat it : 
-For exemple the key that contains "abc" and [2, 3, 5] :
-	- a -> 2
-	- b -> 3
-	- c -> 5
-As you see, we connect all caracters with a primary number. Like in a dictionary or an array.
-We want to cypher the word "bac" with our key.
- b a c => 3 x 2 x 5 = 30. 
- **30** Perfect, we've got our first part of our cyphered word. Let's make the second part.
- We have to make a list that contains the indexs of bac (our word) in the order of abc (our key).
- 	- b : 1
- 	- a : 0
- 	- c : 2
-Nice, we have finished cyphering the word : *30/1.0.2*
+First of all, we have to creat a key that will be used to cipher and decipher the messages. The key contains all the caracters that would be used in the clear message. Let's take an exemple, we want to encrypt the word "bac", so our key will at least contain "a", "b" and "c". Every caracter in the key will be assigned to a primary number, no matter it order. Let's take the three firsts primary numbers : 2, 3 and 5. The key structur is a dictionnary like : 
+key = { "a" : 2,
+	"z": 11,
+	"b" : 5,
+	"c" : 3,
+	"d" : 7}
+Ok, the key is ready, let encrypt our word. The encryption is done in two parts : the firts one is the cyphered word, the second is the order of the craacters : 
+First part : we take every number assigned to there letter of the word from the key and we multipli them : 
+b * a * c = 5 * 2 * 3 = 30
+The firts part is done, let's do the scond one : 
+We have to index every caracter of the word depends on the alphabetical order defined in the key : 
+b -> 2 : because it's the second letter 
+a -> 1 : because it's the firts
+c -> 3 : bacause it's the third
+Everything is done, our encrypted word is `30/2.1.3`
 
-We've receved the cyphered word. Let's make it decyphered.
-If you remember, the algorythm is symetrical, so to decypher, we've got the same key that we used to cypher.
-We take the first part of the cyphered word : 30, we have to factorize it : 
-30 = 2 x 3 x 5
-We use the key to change numbers into letters : 
-	- 2 : a
-	- 3 : b
-	- 5 : c
-We index our caracters and put them in the order of the second part of the cyphered word (1.0.2)
-	- a : 0
-	- b : 1
-	- c : 2
-	========
-	- b : 1
-	- a : 0
-	- c : 2
-And finally we've got the decyphered word : bac.
+Let's decipher it !
+We will use the same key.
+We start with factoring the first part of the encrypted word : 
+30 = 2 * 3 * 5
+Using the key, we can find the letters assigned to the primary numbers found.
+2 -> "a"
+3 -> "b"
+5 -> "c"
+Now, we have to index it depends on the second part of the encrypted word : 
+a -> 2 : we move the a to the second place
+b -> 1 : we move the b to the first place
+c -> 3 : we let the c at the third place
+And finaly we find "bac".
+
+
 
 # The hashing
 
@@ -109,14 +97,14 @@ That's all for the algorythm, let's use it in the module.
 
 g = GAY.GAY()
 g.key = GAY.key_gen("abc", 2)
-print(g.cypher("bac"))
+print(g.cipher("bac"))
 print(g.hash("bac"))
 ``` 
 We've started by importing the module.
-We created g that contains the class GAY() that contains all main functions.
+G is a new instance of class GAY that contains all main functions.
 key is an attribut of the class GAY() that contains the key.
 key_gen() is a method from GAY() that generate a key, the first argument is the caracters that we will use, the second is the first primary number that we will use, the script automaticly generate the primary numbers needed that comes after the one gived as argument.
-cypher() is the method that cypher a word with the key in GAY().key .
+cipher() is the method that cypher a word with the key in GAY().key .
 hash() is the method that hash a word with the key in GAY().key .
 
 That ouptuts : 
