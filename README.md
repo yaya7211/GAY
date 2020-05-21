@@ -56,6 +56,8 @@ a -> 1 : because it's the firts
 c -> 3 : bacause it's the third
 Everything is done, our encrypted word is `30/2.1.3`
 
+# The deciphering
+
 Let's decipher it !
 We will use the same key.
 We start with factoring the first part of the encrypted word : 
@@ -70,26 +72,6 @@ b -> 1 : we move the b to the first place
 c -> 3 : we let the c at the third place
 And finaly we find "bac".
 
-
-
-# The hashing
-
-Now we will see how does works the hashing algorythm.
-First of all, we creat a key and cypher a word like we did before.
-For the same key and the same word, we have got 30/1.0.2.
-We call x "30"'s lenght x = lenght("30") = 2, and y [1.0.2]'s lenght y = lenght([1.0.2]) = 3
-We find the greatest commom divisor of x and y, that is 1.
-The hash is the sucession of 1 caracter from the first part of the cyphred word and 1 from the second, until we use all caracters of the smallest part : 
-	- 3 : 1st caracter from 30
-	- 1 : 1st caracter from [1.0.2]
-	- 0 : 2nd caracter from 30
-	- 0 : 2nd caracter from [1.0.2]
-We stopped before using the last element of [1.0.2] because we took all elements from 30.
-The first caracter is always the first caracter from the first part of the cyphered word.
-If the greatest common divisor equal 1, the first part become the first half of the word ( ex : 3040 become 30).
-
-That's all for the algorythm, let's use it in the module.
-
 ### Using the module
 
 ```py
@@ -98,7 +80,6 @@ That's all for the algorythm, let's use it in the module.
 key = GAY.key_gen("abc", 2)
 g = GAY.GAY(key)
 print(g.cipher("bac"))
-print(g.hash("bac"))
 ``` 
 We've started by importing the module.
 G is a new instance of class GAY that contains all main functions.
