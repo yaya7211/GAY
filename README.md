@@ -115,6 +115,6 @@ g.key = GAY.use_key(path)
 that automaticly use the key specified in path.
 
 ### HELP I'VE GOT ERRORS
-The only error you can have is : UnfoundElementError, that means that the key you are using is wrong.
+The only error you can have is : InvalidKeyError, that means that the key you are using is wrong or the key you are trying to creat is in an invalid format.
 
 ### HAVE FUN !!!
