@@ -36,7 +36,7 @@ If you get a "ModuleNotFoundError", that means that you should try the installat
 
 ### Explaining algorythms 
 
-Let's see how does that works.
+Let's see how does that's works.
 
 # The cyphering
 
